@@ -1,0 +1,14 @@
+%table
+  %thead
+    %th Request Number
+    %th Sequence Number
+    %th Request Type
+    %th Responcse Due Date
+    %th Primary Sevice Area Code
+    %th Additional Sevice Area Code
+    %th Company Name
+    %th Address
+    %th Crew On site
+  %tbody
+    - tickets.each do |ticket|
+      = render 'ticket', ticket: ticket

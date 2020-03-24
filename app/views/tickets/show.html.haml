@@ -1,0 +1,41 @@
+%h3
+  = link_to 'Return to All Tickets', tickets_path
+%h2
+  Request Number
+  = link_to ticket.request_number, ticket_path(ticket)
+%table
+  %thead
+    %th Request Number
+    %th Sequence Number
+    %th Request Type
+    %th Responcse Due Date
+    %th Primary Sevice Area Code
+    %th Additional Sevice Area Code
+    %th Company Name
+    %th Address
+    %th Crew On site
+  %tbody
+    = render 'ticket', ticket: ticket
+
+#map
+
+:javascript
+  var coords = #{ raw ticket.site_disposition.to_json };
+
+  function initMap() {
+    var polyCoords = []
+    for (var i = 0; i < coords.length; i++) {
+     polyCoords[i] = new google.maps.LatLng(coords[i].lat, coords[i].lon);
+    }
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: polyCoords[0],
+      mapTypeId: 'terrain'
+    });
+
+    var polygon = new google.maps.Polygon({ path: polyCoords })
+    polygon.setMap(map);
+  }
+
+%script{ async: '', defer: '', src: "https://maps.googleapis.com/maps/api/js?key=#{ Rails.application.credentials.google_maps_api_key }&callback=initMap" }

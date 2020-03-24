@@ -1,0 +1,17 @@
+%tr
+  %td= link_to ticket.request_number, ticket_path(ticket)
+  %td= ticket.sequence_number
+  %td= ticket.request_type
+  %td= ticket.response_due_date_time_at
+  %td= ticket.primary_service_area_code
+  %td= ticket.service_area_codes
+  %td= ticket.excavator.company_name
+  %td.address_cell
+    - ticket.excavator.address.each_pair do |key, value|
+      - if value.is_a?(Hash)
+        = "#{ key.humanize }:"
+        - value.each_pair do |key, value|
+          = "#{ key.humanize }: #{ value }"
+      - else
+        = "#{ key.humanize }: #{ value }"
+  %td= ticket.excavator.crew_on_site
