@@ -38,7 +38,7 @@ describe Api::RequestsController, type: :controller do
       let(:request_body) { {}.to_json }
 
       it 'returns an error' do
-        expect(subject.status).to eq(200)
+        expect(subject.status).to eq(400)
         expect(JSON.parse(response.body)).to eq('errors' => { 'ticket_attributes' => ['are invalid'] })
       end
     end

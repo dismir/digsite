@@ -11,7 +11,7 @@ module Api
       if request_creator.success?
         render json: request_creator.ticket.to_json(include: :excavator), status: :created
       else
-        render json: { errors: request_creator.errors }, status: :ok
+        render json: { errors: request_creator.errors }, status: :bad_request
       end
     end
 
