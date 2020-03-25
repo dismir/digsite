@@ -35,4 +35,5 @@ ActiveRecord::Schema.define(version: 2020_03_17_191746) do
     t.index ["request_number"], name: "index_tickets_on_request_number"
   end
 
+  add_foreign_key "excavators", "tickets"
 end
